@@ -44,9 +44,9 @@
             [ivarDic setObject:value forKey:ivarName];
         }
     }
-    
+
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:ivarDic options:NSJSONWritingPrettyPrinted error:nil];
-    
+    NSString *jsonStr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
     NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
     
 }
