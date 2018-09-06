@@ -8,7 +8,7 @@
 
 #import "DBObject.h"
 #import <objc/runtime.h>
-
+#import "MyObject.h"
 @interface DBObject()
 
 @property (nonatomic, copy) NSString *interfaceString;
@@ -23,7 +23,62 @@
     return NSStringFromClass(self.class);
 }
 
-- (void)toJson {
+- (NSString *)SQLTableName {
+    
+    return NSStringFromClass(self.class);
+}
+
+- (NSData *)toJsonData {
+
+    NSMutableDictionary *ivarDic = [@{} mutableCopy];
+
+    NSDictionary *dic = [self getAllIvarNameAndType];
+    [dic enumerateKeysAndObjectsUsingBlock:^(NSString *  _Nonnull key, NSString *  _Nonnull obj, BOOL * _Nonnull stop) {
+       
+        if ([obj isEqualToString:@"B"] || [obj isEqualToString:@"i"] || [obj isEqualToString:@"f"]) {
+            
+            NSNumber *value = [self valueForKey:key];
+            [ivarDic setObject:value forKey:key];
+        } else if ([obj isEqualToString:@"@\"NSString\""]) {
+            
+            NSString *value = [self valueForKey:key]?:@"";
+            [ivarDic setObject:value forKey:key];
+        }
+    }];
+
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:ivarDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonStr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+    NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+    
+    return jsonData;
+}
+
+- (NSDictionary *)toJsonDic {
+    
+    NSMutableDictionary *ivarDic = [@{} mutableCopy];
+    
+    NSDictionary *dic = [self getAllIvarNameAndType];
+    [dic enumerateKeysAndObjectsUsingBlock:^(NSString *  _Nonnull key, NSString *  _Nonnull obj, BOOL * _Nonnull stop) {
+        
+        if ([obj isEqualToString:@"B"] || [obj isEqualToString:@"i"] || [obj isEqualToString:@"f"]) {
+            
+            NSNumber *value = [self valueForKey:key];
+            [ivarDic setObject:value forKey:key];
+        } else if ([obj isEqualToString:@"@\"NSString\""]) {
+            
+            NSString *value = [self valueForKey:key]?:@"";
+            [ivarDic setObject:value forKey:key];
+        }
+    }];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:ivarDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonStr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+    NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+    
+    return jsonDic;
+}
+
+- (NSDictionary *)getAllIvarNameAndType {
     
     uint count;
     Ivar *ivarList = class_copyIvarList(self.class, &count);
@@ -32,27 +87,17 @@
         
         Ivar ivar = ivarList[i];
         NSString *ivarName = [NSString stringWithCString:ivar_getName(ivar) encoding:NSUTF8StringEncoding];
+        ivarName = [ivarName substringFromIndex:1];
         NSString *ivarType = [NSString stringWithCString:ivar_getTypeEncoding(ivar) encoding:NSUTF8StringEncoding];
         NSLog(@"name = %@, type = %@", ivarName, ivarType);
-        if ([ivarType isEqualToString:@"B"] || [ivarType isEqualToString:@"i"] || [ivarType isEqualToString:@"f"]) {
-            
-            NSNumber *value = [self valueForKey:ivarName];
-            [ivarDic setObject:value forKey:ivarName];
-        } else if ([ivarType isEqualToString:@"@\"NSString\""]) {
-            
-            NSString *value = [self valueForKey:ivarName]?:@"";
-            [ivarDic setObject:value forKey:ivarName];
-        }
+        [ivarDic setObject:ivarType forKey:ivarName];
     }
-
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:ivarDic options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jsonStr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
-    NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
     
+    return ivarDic;
 }
 
 + (NSDictionary *)runtime {
-    
+    //获取property的名字以及对应的类型
     uint count;
     objc_property_t *propertyList = class_copyPropertyList(self.class, &count);
     NSMutableDictionary *propertyDic = [@{} mutableCopy];
@@ -94,15 +139,29 @@
     return dic;
 }
 
+- (NSString *)mainKey {
+    
+    NSString *tableName = [self SQLTableName];
+    NSString *first = [tableName substringToIndex:1].lowercaseString;
+    NSString *key = [NSString stringWithFormat:@"%@%@Id", first, [tableName substringWithRange:NSMakeRange(1, tableName.length-1)]];//转化为首字母小写
+    return key;
+}
+
++ (NSString *)mainKey {
+    
+    NSString *tableName = [self SQLTableName];
+    NSString *first = [tableName substringToIndex:1].lowercaseString;
+    NSString *key = [NSString stringWithFormat:@"%@%@Id", first, [tableName substringWithRange:NSMakeRange(1, tableName.length-1)]];//转化为首字母小写
+    return key;
+}
+
 + (NSString *)SQLTableString {
     
     NSString *sql = @"create table if not exists ";
     sql = [sql stringByAppendingString:[NSString stringWithFormat:@"'%@'", [DBObject SQLTableName]]];
     
     NSMutableDictionary *propertyDic = [[self runtime] mutableCopy];
-    NSString *tableName = [self SQLTableName];
-    NSString *first = [tableName substringToIndex:1].lowercaseString;
-    NSString *key = [NSString stringWithFormat:@"%@%@Id", first, [tableName substringWithRange:NSMakeRange(1, tableName.length-1)]];//转化为首字母小写
+    NSString *key = [self mainKey];
     NSString *value = propertyDic[key];
     if (value) {
         
@@ -117,7 +176,7 @@
     sql = [sql substringWithRange:NSMakeRange(0, sql.length-1)];//删除最后一个逗号
     sql = [sql stringByAppendingString:@")"];
     
-    NSLog(@"%@ sqlString = %@", tableName, sql);
+    NSLog(@"%@ sqlString = %@", [self SQLTableName], sql);
     return sql;
 }
 

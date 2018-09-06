@@ -8,6 +8,6 @@
 
 #import "DBObject.h"
 
-@interface MyObject : DBObject
+@interface MyObject : DBObject <DBObject>
 
 @end

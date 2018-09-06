@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <FMDB.h>
-
+@class DBObject;
 @interface DBManager : NSObject
 
 @property (nonatomic, strong) FMDatabaseQueue *dataBase;
 
+
 + (instancetype)shareManager;
+
+- (BOOL)saveDBObject:(DBObject *)object;
 
 @end

@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <FMDB.h>
+@class MyObject;
+@protocol DBObject
+
+@end
+
 @interface DBObject : NSObject
 
 @property (nonatomic, assign, readonly) int intProperty;
@@ -22,10 +27,19 @@
 @property (nonatomic, strong) NSDecimalNumber *decimaNumberTest;
 @property (nonatomic, assign) BOOL boolTest;
 
+@property (nonatomic, strong) MyObject *objectTest;
+
 + (NSString *)SQLTableName;
+- (NSString *)SQLTableName;
++ (NSString *)mainKey;
+- (NSString *)mainKey;
+
 + (NSString *)SQLTableString;
 + (NSDictionary *)runtime;
 
-- (void)toJson;
+- (NSDictionary *)toJsonDic;
+- (NSData *)toJsonData;
+
+- (NSDictionary *)getAllIvarNameAndType;
 
 @end

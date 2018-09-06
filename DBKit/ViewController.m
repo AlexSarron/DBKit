@@ -35,10 +35,15 @@
     object.floatProperty = 3.12322;
     object.boolTest = NO;
     object.boolProperty = true;
-    [object toJson];
+    [object toJsonDic];
     [DBObject SQLTableString];
     
     [MyObject SQLTableString];
+    
+    
+    self.manager = [DBManager shareManager];
+    [self.manager saveDBObject:object];
+    
 }
 
 - (void)didReceiveMemoryWarning {
