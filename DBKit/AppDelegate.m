@@ -8,18 +8,77 @@
 
 #import "AppDelegate.h"
 
+@interface Sark2 : NSObject
+@property (nonatomic, copy) NSString *name1;
+@property (nonatomic, copy) NSString *name;
+@end
+@implementation Sark2
+- (void)speak {
+    NSLog(@"my name's %@", self.name);
+}
+@end
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
+- (void)sunny {
+    
+    id cls = [Sark2 class];
+    void *obj = &cls;
+    NSObject *object = [NSObject new];
+    [(__bridge id)(obj) speak];
+    
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+//    [self sunny];
+    int a[5] = {1,2,3,4,5};
+    int *ptr = (int *)(&a+1);
+//    NSLog(@"%d,%d",*(a+1),*(ptr-1));
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        NSLog(@"4");
+    });
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSLog(@"5");
+    });
+    
+    [self performSelector:@selector(test2)];
+    
+    [self performSelector:@selector(test3) withObject:nil afterDelay:0];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSLog(@"6");
+    });
+    
+    [self test1];
+    
     return YES;
 }
 
+- (void)test1 {
+    
+    NSLog(@"1");
+}
+
+- (void)test2 {
+    
+    NSLog(@"2");
+}
+
+- (void)test3 {
+    
+    NSLog(@"3");
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

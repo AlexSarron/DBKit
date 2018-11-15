@@ -7,7 +7,25 @@
 		<key>DBKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>6</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>990890252137D88C00D5B9AA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9908903D2137D88D00D5B9AA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>990890482137D88D00D5B9AA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

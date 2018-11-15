@@ -18,6 +18,11 @@
 
 @implementation DBObject
 
++ (void)load {
+    
+    
+}
+
 + (NSString *)SQLTableName {
     
     return NSStringFromClass(self.class);

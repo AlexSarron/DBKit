@@ -9,6 +9,7 @@ target 'DBKit' do
   
   pod 'FMDB'
   pod 'AFNetworking', '~> 3.0'
+  pod 'SDWebImage', '~> 4.0'
 
   target 'DBKitTests' do
     inherit! :search_paths

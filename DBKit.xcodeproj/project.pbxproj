@@ -19,6 +19,10 @@
 		9908905D2137DA1400D5B9AA /* DBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908905C2137DA1400D5B9AA /* DBObject.m */; };
 		990890602137DA5C00D5B9AA /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908905F2137DA5C00D5B9AA /* DBManager.m */; };
 		99089063213805CF00D5B9AA /* MyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 99089062213805CF00D5B9AA /* MyObject.m */; };
+		990F52E321758522000222E6 /* NSDictionary+objectForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 990F52E221758522000222E6 /* NSDictionary+objectForKey.m */; };
+		9924B5CE215B2DCB0093BCAE /* NSObject+method.m in Sources */ = {isa = PBXBuildFile; fileRef = 9924B5CD215B2DCB0093BCAE /* NSObject+method.m */; };
+		99C5D20D216E000900B94DE5 /* AFHTTPSessionManager+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C5D20B216E000900B94DE5 /* AFHTTPSessionManager+Test.m */; };
+		99C5D216216F2F6F00B94DE5 /* UIAlertView+show.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C5D215216F2F6F00B94DE5 /* UIAlertView+show.m */; };
 		A01E992F45EA57892824BE7F /* libPods-DBKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6FA57316F4039F823FCF76 /* libPods-DBKitTests.a */; };
 		CA410822EFB0E0098CA396BA /* libPods-DBKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEF289DDD3B0DD6870FFC3F /* libPods-DBKit.a */; };
 /* End PBXBuildFile section */
@@ -69,6 +73,14 @@
 		9908905F2137DA5C00D5B9AA /* DBManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		99089061213805CF00D5B9AA /* MyObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyObject.h; sourceTree = "<group>"; };
 		99089062213805CF00D5B9AA /* MyObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyObject.m; sourceTree = "<group>"; };
+		990F52E121758522000222E6 /* NSDictionary+objectForKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+objectForKey.h"; sourceTree = "<group>"; };
+		990F52E221758522000222E6 /* NSDictionary+objectForKey.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+objectForKey.m"; sourceTree = "<group>"; };
+		9924B5CC215B2DCB0093BCAE /* NSObject+method.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+method.h"; sourceTree = "<group>"; };
+		9924B5CD215B2DCB0093BCAE /* NSObject+method.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+method.m"; sourceTree = "<group>"; };
+		99C5D20B216E000900B94DE5 /* AFHTTPSessionManager+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPSessionManager+Test.m"; sourceTree = "<group>"; };
+		99C5D20C216E000900B94DE5 /* AFHTTPSessionManager+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPSessionManager+Test.h"; sourceTree = "<group>"; };
+		99C5D214216F2F6F00B94DE5 /* UIAlertView+show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+show.h"; sourceTree = "<group>"; };
+		99C5D215216F2F6F00B94DE5 /* UIAlertView+show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+show.m"; sourceTree = "<group>"; };
 		CCEF289DDD3B0DD6870FFC3F /* libPods-DBKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DBKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC714A12073A034D7029A31F /* Pods-DBKitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBKitUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DBKitUITests/Pods-DBKitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F3C4C0B50D2C614CA11870EE /* Pods-DBKitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBKitUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DBKitUITests/Pods-DBKitUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,12 +156,20 @@
 				9908902A2137D88C00D5B9AA /* AppDelegate.m */,
 				9908902C2137D88C00D5B9AA /* ViewController.h */,
 				9908902D2137D88C00D5B9AA /* ViewController.m */,
+				99C5D214216F2F6F00B94DE5 /* UIAlertView+show.h */,
+				99C5D215216F2F6F00B94DE5 /* UIAlertView+show.m */,
+				99C5D20C216E000900B94DE5 /* AFHTTPSessionManager+Test.h */,
+				99C5D20B216E000900B94DE5 /* AFHTTPSessionManager+Test.m */,
 				9908905B2137DA1400D5B9AA /* DBObject.h */,
 				9908905C2137DA1400D5B9AA /* DBObject.m */,
 				99089061213805CF00D5B9AA /* MyObject.h */,
 				99089062213805CF00D5B9AA /* MyObject.m */,
 				9908905E2137DA5C00D5B9AA /* DBManager.h */,
 				9908905F2137DA5C00D5B9AA /* DBManager.m */,
+				9924B5CC215B2DCB0093BCAE /* NSObject+method.h */,
+				9924B5CD215B2DCB0093BCAE /* NSObject+method.m */,
+				990F52E121758522000222E6 /* NSDictionary+objectForKey.h */,
+				990F52E221758522000222E6 /* NSDictionary+objectForKey.m */,
 				9908902F2137D88C00D5B9AA /* Main.storyboard */,
 				990890322137D88D00D5B9AA /* Assets.xcassets */,
 				990890342137D88D00D5B9AA /* LaunchScreen.storyboard */,
@@ -378,11 +398,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9908902E2137D88C00D5B9AA /* ViewController.m in Sources */,
+				9924B5CE215B2DCB0093BCAE /* NSObject+method.m in Sources */,
 				990890392137D88D00D5B9AA /* main.m in Sources */,
+				990F52E321758522000222E6 /* NSDictionary+objectForKey.m in Sources */,
 				99089063213805CF00D5B9AA /* MyObject.m in Sources */,
 				9908905D2137DA1400D5B9AA /* DBObject.m in Sources */,
 				9908902B2137D88C00D5B9AA /* AppDelegate.m in Sources */,
 				990890602137DA5C00D5B9AA /* DBManager.m in Sources */,
+				99C5D20D216E000900B94DE5 /* AFHTTPSessionManager+Test.m in Sources */,
+				99C5D216216F2F6F00B94DE5 /* UIAlertView+show.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
